@@ -46,9 +46,8 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 ├── xinzhixue_engine.py       Python 判定引擎（可独立运行）
 ├── data/
 │   └── cases.json            110 个案例 + 6 个边缘测试
-├── root/
-│   ├── index.html            交互式网页（单文件，双击即用，无需联网）
 ├── docs/
+│   ├── index.html            交互式网页（单文件，双击即用，无需联网）
 │   ├── PREPRINT_DRAFT.md     预印本草稿（英文）
 │   ├── INTER_RATER_PLAN.md   评判者信度实验方案
 │   └── README_CN.txt         中文简介（极简版 + 完整版）
