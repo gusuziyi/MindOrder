@@ -6,8 +6,8 @@
 
 A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 
-[![版本](https://img.shields.io/badge/版本-v3.7-blue.svg)](https://github.com/)
-[![案例](https://img.shields.io/badge/案例-116-green.svg)](data/cases.json)
+[![版本](https://img.shields.io/badge/版本-v3.8-blue.svg)](https://gusuziyi.github.io/MindOrder/)
+[![案例](https://img.shields.io/badge/案例-178-green.svg)](data/cases.json)
 [![Python](https://img.shields.io/badge/python-3.8+-orange.svg)](xinzhixue_engine.py)
 
 ---
@@ -40,17 +40,18 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 
 ```
 ├── README.md                 本文件（中文）
-├── README_en.md              英文说明
-├── LICENSE                   MIT
-├── LICENSE-DOCS              CC‑BY‑4.0
+├── LICENSE                   MIT（软件代码）
+├── LICENSE-DOCS              CC‑BY‑4.0（文档与内容）
+├── .gitignore
 ├── xinzhixue_engine.py       Python 判定引擎（可独立运行）
 ├── data/
-│   └── cases.json            110 个案例 + 6 个边缘测试
-├── docs/
-│   ├── index.html            交互式网页（单文件，双击即用，无需联网）
-│   ├── PREPRINT_DRAFT.md     预印本草稿（英文）
-│   ├── INTER_RATER_PLAN.md   评判者信度实验方案
-│   └── README_CN.txt         中文简介（极简版 + 完整版）
+│   └── cases.json            172 个案例 + 6 个演示
+└── docs/
+    ├── index.html            交互式网页（单文件，双击即用，无需联网）
+    ├── INTER_RATER_PLAN.md   评判者信度实验方案
+    ├── README_CN.txt         中文简介（极简版 + 完整版）
+    ├── 心秩学_v3.8_公理体系.docx   公理体系文档
+    └── 心秩学_v3.8_案例精选.docx   案例精选文档
 ```
 
 ---
@@ -58,7 +59,7 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 ## 快速开始
 
 ```bash
-# 运行全量复算（应输出 主案例一致 110/110，演示一致 6/6）
+# 运行全量复算（应输出 主案例一致 172/172，演示一致 6/6）
 python3 xinzhixue_engine.py
 ```
 
@@ -101,13 +102,13 @@ python3 xinzhixue_engine.py
 
 ## 验证状态
 
-| 类型    | 结果                              |
-| ----- | ------------------------------- |
-| 内部一致性 | 116 / 116                       |
-| 参数敏感性 | 破坏权重 [1.0, 1.6] 区间内 116 例判定完全不变 |
-| 消融实验  | 已发现并修复「维度悬空」与「C8 名实不符」两处问题      |
+| 类型    | 结果                                              |
+| ----- | ----------------------------------------------- |
+| 内部一致性 | 178 / 178                                       |
+| 参数敏感性 | 破坏权重 [1.0, 1.5]、严重比例 [1.5, 2.0] 区间内 172 例判定完全不变 |
+| 消融实验  | 已发现并修复「维度悬空」与「C8 名实不符」两处问题                      |
 
-### ⚠️ 关于 116/116，必须说清楚
+### 关于 178/178，必须说清楚
 
 **这个数字只证明内部一致性，不证明外部有效性。**
 
