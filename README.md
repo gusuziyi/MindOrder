@@ -6,7 +6,7 @@
 
 A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 
-[![版本](https://img.shields.io/badge/版本-v3.8-blue.svg)](https://gusuziyi.github.io/MindOrder/)
+[![版本](https://img.shields.io/badge/版本-v3.9-blue.svg)](https://gusuziyi.github.io/MindOrder/)
 [![案例](https://img.shields.io/badge/案例-172-green.svg)](data/cases.json)
 [![Python](https://img.shields.io/badge/python-3.8+-orange.svg)](xinzhixue_engine.py)
 
@@ -29,7 +29,7 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 
 ---
 
-[心秩学判定引擎 v3.8](https://gusuziyi.github.io/MindOrder/)
+[心秩学判定引擎 v3.9](https://gusuziyi.github.io/MindOrder/)
 
 ## 一句话
 
@@ -52,8 +52,8 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
     ├── index.html            交互式网页（单文件，双击即用，无需联网）
     ├── INTER_RATER_PLAN.md   评判者信度实验方案
     ├── README_CN.txt         中文简介（极简版 + 完整版）
-    ├── 心秩学_v3.8_公理体系.docx   公理体系文档
-    └── 心秩学_v3.8_案例精选.docx   案例精选文档
+    ├── 心秩学_v3.9_公理体系.docx   公理体系文档
+    └── 心秩学_v3.9_案例精选.docx   案例精选文档
 ```
 
 ---

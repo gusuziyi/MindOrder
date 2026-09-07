@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>心秩学判定引擎 v3.8</title>
+<title>心秩学判定引擎 v3.9</title>
 <style>
 :root{
   --ink:#1a2233; --ink2:#3d4a5f; --ink3:#6b7789;
@@ -292,7 +292,7 @@ footer b{color:#fff}
 
 <header>
   <div class="wrap">
-    <h1>心秩学判定引擎 v3.8</h1>
+    <h1>心秩学判定引擎 v3.9</h1>
     <div class="sub">慈秩博工 · 四维三层五步法 —— 把价值评判编译成可执行、可复现的判定流程</div>
     <div class="meta">
       <span><b>4</b> 条公理</span>
@@ -609,7 +609,7 @@ footer b{color:#fff}
       <tbody>
         <tr><td><code>C1</code></td><td><b>无罪推定</b></td><td>默认普世层基础信任，须有实证方可降级。证据越不可靠越难定罪</td><td>← <b>A1</b></td></tr>
 <tr><td><code>C2</code></td><td><b>只处理已知</b></td><td>只计量已发生的事实；预言与「长期看是好的」不进入损益</td><td>← <b>A1</b></td></tr>
-<tr><td><code>C3</code></td><td><b>min 原则</b></td><td>慈、秩、博取短板：恶行不被善行掩盖，盲区不被洞见掩盖。仅工看总量</td><td>← <b>A3</b></td></tr>
+<tr><td><code>C3</code></td><td><b>min 原则</b></td><td>慈取各段短板，秩博工取各段长板；疆域型主体博再取地缘/生产力短板。恶行不被善行掩盖，盲区不被洞见掩盖</td><td>← <b>A3</b></td></tr>
 <tr><td><code>C4</code></td><td><b>褒奖权归各维度</b></td><td>四维各自褒奖各自的事，不在单一维度上叠加道德评价</td><td>← <b>A3</b></td></tr>
 <tr><td><code>C5</code></td><td><b>禁止双重惩罚</b></td><td>同一事实不判两次：慈已归零则工不再罚；底线危害不重复计入第四步；分段破局不重复降档</td><td>← <b>A3</b></td></tr>
 <tr><td><code>C6</code></td><td><b>主体分离</b></td><td>政权／遗产分开判，个人／制度分开判。人担罪，制存功</td><td>← <b>A3</b></td></tr>
@@ -654,7 +654,7 @@ footer b{color:#fff}
 <!-- ============ Tab 4: 历史更新 ============ -->
 <section class="tab" id="tab-history">
   <div class="card">
-    <h2>版本演进 v2.0 → v3.8</h2>
+    <h2>版本演进 v2.0 → v3.9</h2>
     <div class="desc">
       下面记录每个版本<b>真正改变了什么</b>，以及那些<b>被撤销的规则</b>——
       一套体系的说服力不只来自它有什么，也来自它删掉过什么。
@@ -666,14 +666,14 @@ footer b{color:#fff}
 
 <footer>
   <div class="wrap">
-    <b>心秩学 · 慈秩博工</b>　v3.8<br>
+    <b>心秩学 · 慈秩博工</b>　v3.9<br>
     <span style="opacity:.75">相对在输入，绝对在底线</span>
   </div>
 </footer>
 
 <script>
 /* ============================================================
-   心秩学判定引擎 v3.8 · JS 移植版
+   心秩学判定引擎 v3.9 · JS 移植版
    4 条公理 · 1 条元规则 · 12 条推论
    与 Python 版逐条对照，判定零回归
    ============================================================ */
@@ -836,8 +836,15 @@ function stage2(case_, lens) {
     if (evid["博_违背可验证事实"]) { bo = 3; defects.push("博违背可验证事实 → 降为精英"); }
     if (!evid["博_体系性认知"]) { bo = 3; defects.push("博未形成体系性认知 → 降为精英"); }
   }
-  if (NATION.has(case_.identity) && evid["博_地缘"] && evid["博_生产力"])
-    flags.push("第三步 博取 min(地缘, 生产力)：盲区不被洞见掩盖");
+  if (NATION.has(case_.identity) && evid["博_地缘"] && evid["博_生产力"]) {
+    flags.push("第三步 博短板（地缘/生产力）：盲区不被洞见掩盖");
+    const parseBo = t => t.startsWith("强") ? 4 : t.startsWith("中") ? 3 : t.startsWith("弱") ? 2 : t.startsWith("倒退") ? 1 : t.startsWith("偏科") ? 2 : null;
+    const gv = parseBo(evid["博_地缘"]), pv = parseBo(evid["博_生产力"]);
+    if (gv !== null && pv !== null && Math.min(gv, pv) < bo) {
+      bo = Math.min(gv, pv);
+      defects.push("博短板：地缘/生产力取 min → 降为" + L_INV[bo]);
+    }
+  }
 
   // 第二步 工至圣三条件 + C8 降工规则
   if (gong === 4) {
@@ -1061,7 +1068,7 @@ function evaluateAll(case_) {
 
 /* ==================== 案例库数据 ==================== */
 const CASE_DATA = {
-  "version": "3.8",
+  "version": "3.9",
   "meta": {
     "note": "心秩学 v2.2 五十案例库。contrib/destroy 由「影响人数 × 存续年限 × 强度」真实接线计算。",
     "layers": {
@@ -4679,7 +4686,7 @@ const CASE_DATA = {
           "primary": true
         }
       ],
-      "expected": "精英（未兑现型·工薄弱）",
+      "expected": "精英（未兑现型·博、工薄弱）",
       "note": "**秩取 min 的关键验证**：对内秩序极好（300年无藩镇、无大规模民变、文官治理成熟），但**对外主权残缺**（燕云未复、称臣纳贡）。按 秩=min(对内有效,对外主权) → 秩精英。这解释了『弱宋』的『弱』字弱在哪里：**不是内部治理差，是对外秩序失败**。博精英：**地缘认知弱**（燕云），**生产力认知强**（交子=世界最早纸币）",
       "evidence": {
         "慈": "福利体系完备，民生保障为历代之最",
@@ -4740,7 +4747,7 @@ const CASE_DATA = {
           "primary": true
         }
       ],
-      "expected": "普世（底线破缺型·慈为无·工薄弱）",
+      "expected": "普世（底线破缺型·慈为无·博塌陷·工薄弱）",
       "note": "**地缘认知的倒退案例**：郑和下西洋展示了海洋认知，但随后**海禁**是明确的倒退。**生产力认知不足**：火器未持续迭代，至明末已落后于西方。博仅精英。工精英：缺自我修复（祖制不可变，只能崩溃重来）",
       "evidence": {
         "慈": "前期休养生息，后期加派与民变",
@@ -5202,7 +5209,7 @@ const CASE_DATA = {
           "primary": false
         }
       ],
-      "expected": "普世（底线破缺型·慈为无·工薄弱）",
+      "expected": "普世（底线破缺型·慈为无·博、工薄弱）",
       "note": "秩至圣：计划经济+苏维埃体系是文明级秩序实验，且工业化为卫国战争提供基础。博精英：**地缘**（陆权缓冲）到位，**生产力**认知偏科——重工业/航天极强，但**未识别信息技术革命**，民生生产力长期滞后。工精英：**无自我修复能力**（体制无法改革，最终解体而非转型）——这是『制度活不过自己』的负面典型",
       "evidence": {
         "慈": "古拉格与制度性清洗，击穿底线",
@@ -5683,7 +5690,8 @@ const CASE_DATA = {
           "bias": "强调剥削规模",
           "confidence": 0.8,
           "attribution": 1.3,
-          "primary": false
+          "primary": false,
+          "severity_note": "孟加拉大饥荒（约1000万人死亡）：制度性剥夺规模历史级"
         }
       ],
       "expected": "精英（底线破缺型·慈为无）",
@@ -6410,7 +6418,7 @@ const CASE_DATA = {
           "primary": false
         }
       ],
-      "expected": "普世（底线破缺型·慈、秩为无·工塌陷）",
+      "expected": "普世以下（底线破缺型·慈、秩为无·工塌陷·博薄弱）",
       "evidence": {
         "慈": "亚美尼亚大屠杀，慈的彻底背离",
         "秩": "地方割据＋财政破产＋军事失败，三柱俱断",
@@ -6623,7 +6631,7 @@ const CASE_DATA = {
           "primary": false
         }
       ],
-      "expected": "至圣（残缺型·部分兑现）",
+      "expected": "至圣（残缺型·博薄弱·部分兑现）",
       "evidence": {
         "慈": "长期和平下民生稳定，町人文化繁荣",
         "秩": "幕藩体制，二百六十年无内战",
@@ -11408,7 +11416,7 @@ function gloss(str) {
   const show = e => {
     const t = e.target && e.target.closest ? e.target.closest('.term') : null;
     if (!t) return;
-    tip.textContent = GLOSSARY[t.dataset.t] || '';
+    tip.innerHTML = md(GLOSSARY[t.dataset.t] || '');
     tip.style.display = 'block';
     const r = t.getBoundingClientRect();
     let left = r.left;
@@ -11773,6 +11781,11 @@ function structInfo(r) {
     四维结构最高为 <b>${names[r.top]}</b>，经降档因子下调 <b>${reduced}</b> 档 → <b>${r.level}</b>。
     <br>标签描述<b>四维结构</b>，层级描述<b>降档后的最终定性</b>——两者并行，不互相覆盖。</div>`;
 }
+function md(s) {
+  // 仅 Markdown 粗体 → <b>，不做 HTML 转义（用于受控的 GLOSSARY/释义数据，
+  // 其中可能已含有意书写的 <b> 标签，esc 会把这些标签转义成字面量）
+  return String(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+}
 function esc(s) {
   // 顺序关键：先转义（防注入），再做 **粗体** 转换
   // 若顺序颠倒，生成的 <b> 会被自己转义成字面量
@@ -11989,7 +12002,7 @@ function renderDetail() {
   h += `<div class="chain" style="margin-bottom:14px"><div class="t">阶段一 · 先验（A4 此时此地）</div>
     视角 <b>${p.视角}</b>　｜　来源 ${p.来源}　｜　偏见方向 ${p.偏见方向}<br>
     置信度 <b class="mono">${p.置信度}</b>${p.置信度 < 0.6 ? '（<b style="color:var(--warn)">触发 C1 疑罪从有利</b>）' : ''}
-    　归因系数 <b class="mono">${p.归因系数}</b>　<span class="term" data-t="归因系数">（${attrRead(p.归因系数)[2]}：${attrRead(p.归因系数)[3]}）</span></div>`;
+    　归因系数 <b class="mono">${p.归因系数}</b>　<span class="term" data-t="归因系数">（${attrRead(p.归因系数)[2]}：${attrRead(p.归因系数)[3]}）</span>${r.lens && r.lens.severity_note ? `　｜　<b style="color:#a33">严重度标注</b> ${esc(r.lens.severity_note)}` : ''}</div>`;
 
   // 结果
   const tags = [...new Set([...r.metric.factors, ...(r.severe ? ['损益剔除'] : [])])];
@@ -12260,7 +12273,7 @@ const HISTORY = [
 
       <li><b>② 真正的病根：维度悬空</b>。追查后发现——撤掉 min 后，8 例慈值确实变了（唐、莫卧儿帝国、周处、唐玄宗、萧衍、阿育王、希拉克略一世、忽必烈……），<b>但标签纹丝不动</b>。<br>
       原因：最终判定只看<b>布尔标志</b>（有没有归零、有没有非必要暴行、有没有触底线），<b>不看维度的具体档位</b>。慈是 1 档还是 4 档，标签完全一样。<br>
-      统计：<b>172 例中 17 例「至圣但至少一维≤普世以下」、24 例「至圣但至少一维=普世」、122 例「至圣但四维非全满」</b>——这些档位信息在旧版全部丢失。最刺眼的是<b>清朝</b>——我们讨论的核心洞察是「博＝普世以下（未识别工业革命）」，但标签只写「残缺型·部分兑现」，<b>博塌陷根本看不见</b>。<br>
+      统计：<b>172 例中 17 例「至圣但至少一维≤普世以下」、25 例「至圣但至少一维=普世」、122 例「至圣但四维非全满」</b>——这些档位信息在旧版全部丢失。最刺眼的是<b>清朝</b>——我们讨论的核心洞察是「博＝普世以下（未识别工业革命）」，但标签只写「残缺型·部分兑现」，<b>博塌陷根本看不见</b>。<br>
       这比参数问题严重得多：参数不承重只是「取值随意」，<b>维度档位不承重是「分维度独立定级」这个核心卖点没落地</b>。</li>
 
       <li><b>③ 修复：档位出口</b>。让每一档都在标签后缀中可见：<b>0 档 →「X为无」（原有）；1 档 →「X塌陷」；2 档 →「X薄弱」</b>。按慈秩博工顺序排列，多处合并（如「慈、秩薄弱」）。<br>
@@ -12268,8 +12281,8 @@ const HISTORY = [
       <b>注意：档位出口只进标签、不进层级</b>——这符合 A3 分维度独立定级的原则（不让弱维度拉低总分），同时让弱维度可见（复盘时能指出短板在哪）。</li>
 
       <li><b>④ C8 名实对齐：从「记缺陷」改为「真降一档」</b>。此前 C8 的实现是 <code>defects.push(...)</code>，只加了个「有瑕」标记，<b>名字叫「降工」却从不降档</b>。已改为真实降档。<br>
-      命中 <b>24 例</b>，全部是「造得出但活不过自己」的主体，正是 C8 该管的对象：<b>北宋、明、清、苏联、戴尔、德川幕府、阿拉伯帝国、蒙古帝国、纳粹德国、晚清、莫卧儿帝国、唐玄宗、萧衍、三角衬衫厂</b>等。<br>
-      层级分布变化：至圣 132→125、精英 28→32、普世 7→10、普世以下 5→5；<b>共 7 例降级</b>（4 例落至精英、3 例落至普世），不是过度惩罚。</li>
+      命中 <b>25 例</b>，全部是「造得出但活不过自己」的主体，正是 C8 该管的对象：<b>北宋、明、清、苏联、戴尔、德川幕府、阿拉伯帝国、蒙古帝国、纳粹德国、晚清、莫卧儿帝国、唐玄宗、萧衍、三角衬衫厂</b>等。<br>
+      层级分布变化：至圣 132→125、精英 28→32、普世 6→9、普世以下 6→6；<b>共 7 例降级</b>（4 例落至精英、3 例落至普世），不是过度惩罚。</li>
 
       <li><b>⑤ 两处判定由此修正</b>：<br>
       · <b>美属菲律宾教育制度</b>：至圣 → <b>精英（达标型·有瑕）</b>。教育体系规模大、存续久、产出巨量人才，但<b>缺乏自我修复</b>——劳务输出与产业结构失衡持续数十年未能纠正。这正是 C8 的定义：造出来了，但活不过自己。<br>
@@ -12277,14 +12290,17 @@ const HISTORY = [
 
       <li><b>⑥ 修复后重跑消融，规则全部开始承重</b>：<br>
       · 撤掉 C3 min 原则 → 标签变动 <b>0 → 8</b> 例（档位出口打通后，min 的差异终于可见）<br>
-      · 撤掉档位出口 → 标签变动 <b>59</b> 例（证明这一出口承载了大量此前丢失的信息）<br>
-      · 撤掉 C7 准入与地板 → 标签变动 <b>0 → 3</b> 例<br>
+      · 撤掉档位出口 → 标签变动 <b>85</b> 例（证明这一出口承载了大量此前丢失的信息）<br>
+      · 撤掉 C7 准入与地板 → 层级 0、标签 0（172 主案例；仅 1 例演示【验证】C9 地板阈值受影响）<br>
       <b>参数稳健性未因修复而退化</b>：核心带 DW[1.0,1.5]×SR[1.5,2.0] 共 36 组合，完全稳定 24（67%），最差变动 1 例（加勒比奴隶种植园——全库最极端案例，在边界翻转属合理）。稳定带甚至略有拓宽：DESTROY_WEIGHT 由 [1.0,1.5] 拓宽至 [1.0,1.6]，SEVERE_RATIO 由 [1.5,2.0] 拓宽至 [1.4,2.2]（拓宽带 63 组合中 42 组完全稳定）。<b>MAX_REDUCTION = 2 仍是唯一零变动值。</b></li>
 
-      <li><b>⑦ 一个必须澄清的区分</b>：消融实验显示 C3、C5、C9 三条规则<b>层级变动为 0</b>，但这<b>不等于它们没用</b>。它们的作用是<b>在特定条件下防止误判</b>——当前 172 例恰好都没触发那些条件（正如安全气囊在没撞车时也不起作用）。真正的问题是 C3 的<b>档位信息没有出口</b>，这已由第 ③ 条修复。</li>
+      <li><b>⑦ 一个必须澄清的区分</b>：消融实验显示 C5、C9 两条规则<b>层级变动为 0</b>，但这<b>不等于它们没用</b>。它们的作用是<b>在特定条件下防止误判</b>——当前 172 例恰好都没触发那些条件（正如安全气囊在没撞车时也不起作用）。C3 的跨段 min 同样只在标签层承重（撤除后 8 例标签变化），真正的档位信息出口问题已由第 ③ 条修复。</li>
+
+      <li><b>⑧ 博短板名实对齐：组织/国家博取「地缘/生产力」min 由「只记 flag」改为「真降一档」</b>。此前实现只 push 一条缺陷记录，名为「取 min」却从不降档——与 C8 同款名实不符，由复查消融发现。已改为真实降档：命中 <b>5 例</b>（北宋、明、苏联、德川幕府、晚期奥斯曼），北宋/明/苏联/德川幕府仅标签新增「博薄弱／博塌陷」；<b>晚期奥斯曼因博为最高维，普世 → 普世以下</b>（博短板降档直接拉低等级）。分布相应变为：至圣 125、精英 32、普世 9、普世以下 6。<br>
+      重跑消融：撤掉博短板 → 层级变动 <b>1</b>（晚期奥斯曼）、标签变动 <b>5</b>——这条规则从此真正承重，而不再是纸面声明。</li>
     </ul>
     <div class="q">本版最重要的方法论收获：<b>代码倒逼自洽是双向的</b>。上一版我们说是「代码暴露了理论的模糊地带」，这一版更进一步——<b>消融实验能查出「名义上有、实际不起作用」的规则</b>，这类问题在纸面推演中永远发现不了。这也是为什么这套体系必须配一个可执行引擎，而不能只是一份文档。</div>` },
-  { v: 'v3.8.1', title: '数据同步、编号收敛与表述校准',
+  { v: 'v3.9', title: '数据同步、编号收敛与表述校准',
     body: `依据九条使用反馈做的修订，重心是**名实对齐**与**数据可追溯**。
     <ul>
       <li><b>① 痛苦不对称性补上实测依据</b>。此前只写「让一百万人过好日子，不抵消让十万人惨死」，未说明 1.5 这个值是测出来的。现补：DESTROY_WEIGHT 在 [1.0, 1.6] 区间内 172 例判定完全不变，1.5 是该稳定带内与本原则最一致（最严厉）的端点。同时如实标注：取 1.0 时层级变动同为 0，说明它在当前案例集上是潜在参数——架构上承重（A2 硬截断 + C5 底线危害不进第四步），数值上尚不承重。</li>
@@ -12314,7 +12330,7 @@ const HISTORY = [
     d.className = 'tl-item' + (h.major ? ' major' : '');
     d.innerHTML = `<div class="tl-ver">${h.v}</div>
       <div class="tl-title">${h.title}</div>
-      <div class="tl-body">${h.body}</div>`;
+      <div class="tl-body">${md(h.body)}</div>`;
     tl.appendChild(d);
   });
 }
@@ -12329,7 +12345,7 @@ const HISTORY = [
   const draw = q => {
     const list = q ? keys.filter(k => k.includes(q) || GLOSSARY[k].includes(q)) : keys;
     tb.innerHTML = list.map(k =>
-      `<tr><td><span class="term" data-t="${k}"><b>${k}</b></span></td><td>${GLOSSARY[k]}</td></tr>`).join('')
+      `<tr><td><span class="term" data-t="${k}"><b>${k}</b></span></td><td>${md(GLOSSARY[k])}</td></tr>`).join('')
       || '<tr><td colspan="2" class="empty">无匹配术语</td></tr>';
     const cnt = document.getElementById('gloss-count');
     if (cnt) cnt.textContent = `共 ${keys.length} 条术语，当前显示 ${list.length} 条`;
@@ -12386,7 +12402,7 @@ function labelExplHTML(label) {
    <div class="body" style="padding:13px 16px">
    <table style="margin:0"><tbody>` +
    rows.map(([k, t, d]) =>
-     `<tr><th style="width:120px">${t}</th><td>${d}</td></tr>`).join('') +
+     `<tr><th style="width:120px">${t}</th><td>${md(d)}</td></tr>`).join('') +
    `</tbody></table></div></details>`;
 }
 
