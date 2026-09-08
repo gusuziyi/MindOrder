@@ -8,7 +8,7 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 
 [![版本](https://img.shields.io/badge/版本-v3.9-blue.svg)](https://gusuziyi.github.io/MindOrder/)
 [![案例](https://img.shields.io/badge/案例-172-green.svg)](data/cases.json)
-[![Python](https://img.shields.io/badge/python-3.8+-orange.svg)](xinzhixue_engine.py)
+[![Python](https://img.shields.io/badge/python-3.8+-orange.svg)](MindOrder_engine.py)
 
 ---
 
@@ -45,7 +45,9 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 ├── LICENSE                   MIT（软件代码）
 ├── LICENSE-DOCS              CC‑BY‑4.0（文档与内容）
 ├── .gitignore
-├── xinzhixue_engine.py       Python 判定引擎（可独立运行）
+├── MindOrder_engine.py       Python 判定引擎（可独立运行）
+├── MindOrder_Preprint_Draft.md     预印本（英文，v3.9）
+├── MindOrder_Preprint_Draft_zh.md  预印本（中文，v3.9）
 ├── data/
 │   └── cases.json            172 个案例 + 6 个演示
 └── docs/
@@ -62,7 +64,7 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 
 ```bash
 # 运行全量复算（应输出 主案例一致 172/172，演示一致 6/6）
-python3 xinzhixue_engine.py
+python3 MindOrder_engine.py
 ```
 
 网页版：浏览器直接打开 `docs/index.html`，无需安装、无需联网。
