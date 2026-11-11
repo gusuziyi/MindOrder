@@ -6,8 +6,8 @@
 
 A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 
-[![版本](https://img.shields.io/badge/版本-v3.9-blue.svg)](https://gusuziyi.github.io/MindOrder/)
-[![案例](https://img.shields.io/badge/案例-172-green.svg)](data/cases.json)
+[![版本](https://img.shields.io/badge/版本-v4.0-blue.svg)](https://gusuziyi.github.io/MindOrder/)
+[![案例](https://img.shields.io/badge/案例-318-green.svg)](data/cases_v4.0.json)
 [![Python](https://img.shields.io/badge/python-3.8+-orange.svg)](MindOrder_engine.py)
 
 ---
@@ -29,7 +29,7 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 
 ---
 
-[心秩学判定引擎 v3.9](https://gusuziyi.github.io/MindOrder/)
+[心秩学判定引擎 v4.0](https://gusuziyi.github.io/MindOrder/)
 
 ## 一句话
 
@@ -49,13 +49,15 @@ A Framework for Pluralistic Value Assessment: Learn gains, learn limits.
 ├── MindOrder_Preprint_Draft.md     预印本（英文，v3.9）
 ├── MindOrder_Preprint_Draft_zh.md  预印本（中文，v3.9）
 ├── data/
-│   └── cases.json            172 个案例 + 6 个演示
-└── docs/
-    ├── index.html            交互式网页（单文件，双击即用，无需联网）
-    ├── INTER_RATER_PLAN.md   评判者信度实验方案
-    ├── README_CN.txt         中文简介（极简版 + 完整版）
-    ├── 心秩学_v3.9_公理体系.docx   公理体系文档
-    └── 心秩学_v3.9_案例精选.docx   案例精选文档
+│   ├── cases.json            172 个主案例 + 6 个演示（论文口径）
+│   └── cases_v4.0.json       318 个案例（172 主 + 139 十九世纪 + 7 算法治理）+ 6 个演示
+├── docs/                     当前版本文档（v4.0，GitHub Pages 站点根目录）
+│   ├── index.html            交互式网页（单文件，双击即用，无需联网）
+│   ├── INTER_RATER_PLAN.md   评判者信度实验方案
+│   ├── README_CN.txt         中文简介（极简版 + 完整版）
+│   ├── 心秩学_v4.0_公理体系.docx   公理体系文档
+│   └── 心秩学_v4.0_案例精选.docx   案例精选文档
+└── docs_v3.9/                v3.9 归档（保留旧版对照，不参与站点）
 ```
 
 ---
@@ -108,13 +110,13 @@ python3 MindOrder_engine.py
 
 | 类型    | 结果                                                  |
 | ----- | --------------------------------------------------- |
-| 内部一致性 | 172 / 172（主案例）＋ 6 / 6（演示）                           |
+| 内部一致性 | 318 / 318（172 主案例＋139 十九世纪＋7 算法治理）＋ 6 / 6（演示） |
 | 参数敏感性 | 破坏权重 [1.0, 1.6]、严重比例 [1.4, 2.2]（核心带 36 组合 24 组完全稳定） |
 | 消融实验  | 已发现并修复「维度悬空」与「C8 名实不符」两处问题                          |
 
-### 关于 172/172，必须说清楚
+### 关于 318/318，必须说清楚
 
-**口径说明：172 例主案例复算一致率 172/172，另有 6 例演示案例一致率 6/6。**
+**口径说明：全库 318 例复算一致率 318/318（172 主案例＋139 十九世纪＋7 算法治理），另有 6 例演示案例一致率 6/6。论文口径只引用 172 例主案例。**
 
 **这个数字只证明内部一致性，不证明外部有效性。**
 
